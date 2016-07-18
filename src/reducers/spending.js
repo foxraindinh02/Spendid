@@ -1,5 +1,10 @@
+import { SPENDING } from '../actions/types'
 
 export const initialState = {
+  toAdd: {
+    name: '',
+    amount: ''
+  },
   displayList: [
     {
       id : 1,
@@ -19,6 +24,17 @@ export const initialState = {
   ]
 }
 
-const spending = (state, action) => state
+const spending = (state, action) => {
+  switch (action.type) {
+  case SPENDING.CHANGE_TO_ADD_SPENDING:
+    return state.setIn(['toAdd', action.prop], action.value)
+  case SPENDING.ADD_SPENDING:
+    const displayList = state.get('displayList')
+    return state.set('displayList',
+      displayList.push(action.item.set('id', displayList.size)))
+  default:
+    return state
+  }
+}
 
 export default spending

@@ -8,7 +8,7 @@
     "sourceType": "module"
   },
   "plugins": [
-    "react"
+    "react-native"
   ],
   "rules": {
     // Ignore

@@ -1,47 +1,30 @@
 import React from 'react'
-import { connect } from 'react-redux'
-import {
-  ListView, Text, View, StyleSheet
-} from 'react-native'
+import { NavigatorIOS } from 'react-native'
 
-const styles = StyleSheet.create({
-  row: {
-    marginTop: 30,
-    borderBottomWidth: 1,
-    borderBottomColor: 'gray'
-  }
-})
+import SpendingList from './SpendingList'
+import AddSpendingForm from '../AddSpendingForm'
 
-const SpendingList = React.createClass({
+const SpendingListWrapper = React.createClass({
+  onRightButtonPress() {
+    this.refs.nav.push({
+      component: AddSpendingForm,
+      title: 'Add new item'
+    })
+  },
   render() {
-    const {
-      spendingList
-    } = this.props
-    const dataSource = new ListView.DataSource(
-      {
-        rowHasChanged: (r1, r2) => r1.id !== r2.id
-      }
-    ).cloneWithRows(spendingList.toJS())
     return (
-      <ListView dataSource={dataSource} renderRow={
-        row => (
-          <View style={styles.row}>
-            <Text>{row.name}</Text>
-            <Text>{row.amount}</Text>
-          </View>
-        )}
+      <NavigatorIOS
+        ref="nav"
+        initialRoute={{
+          component: SpendingList,
+          title: 'Last Spendings',
+          rightButtonTitle: 'Add',
+          onRightButtonPress: this.onRightButtonPress
+        }}
+        style={{flex: 1}}
       />
     )
   }
 })
 
-const mapStateToProps = state => (
-  {
-    spendingList: state.getIn(['spending', 'displayList'])
-  }
-)
-const SpendingListContainer = connect(
-  mapStateToProps
-)(SpendingList)
-
-export default SpendingListContainer
+export default SpendingListWrapper
