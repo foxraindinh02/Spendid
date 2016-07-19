@@ -1,5 +1,6 @@
 import React from 'react'
 import { View, Text } from 'react-native'
+import GlobalStyle, { SpendingItemStyle } from '../styles'
 
 const SpendingItemRoot = React.createClass({
   render() {
@@ -7,7 +8,7 @@ const SpendingItemRoot = React.createClass({
       item
     } = this.props
     return (
-      <View>
+      <View style={[GlobalStyle.mainView, SpendingItemStyle.mainView]}>
         <Text>{item.name}</Text>
       </View>
     )

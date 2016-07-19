@@ -1,8 +1,10 @@
 import React from 'react'
-import { NavigatorIOS } from 'react-native'
+import { NavigatorIOS, View } from 'react-native'
 
 import SpendingList from './SpendingList'
 import AddSpendingForm from '../AddSpendingForm'
+
+import GlobalStyle, { Colors } from '../styles'
 
 const SpendingListRoot = React.createClass({
   onRightButtonPress() {
@@ -21,7 +23,10 @@ const SpendingListRoot = React.createClass({
           rightButtonTitle: 'Add',
           onRightButtonPress: this.onRightButtonPress
         }}
-        style={{flex: 1}}
+        style={GlobalStyle.navBar}
+        barTintColor={Colors.p500}
+        tintColor={Colors.a100}
+        titleTextColor={Colors.white}
       />
     )
   }

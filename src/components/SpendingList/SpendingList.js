@@ -1,18 +1,12 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import {
-  ListView, Text, View, StyleSheet, TouchableOpacity
+  ListView, Text, View, TouchableOpacity
 } from 'react-native'
 
 import SpendingItem from '../SpendingItem'
-
-const styles = StyleSheet.create({
-  row: {
-    marginTop: 30,
-    borderBottomWidth: 1,
-    borderBottomColor: 'gray'
-  }
-})
+import RowItem from './RowItem'
+import GlobalStyle from '../styles'
 
 const SpendingList = React.createClass({
   navigateToItem(row) {
@@ -33,13 +27,11 @@ const SpendingList = React.createClass({
       }
     ).cloneWithRows(spendingList.toJS())
     return (
-      <ListView dataSource={dataSource} renderRow={
+      <ListView dataSource={dataSource} style={GlobalStyle.mainView}
+        renderRow={
         row => (
           <TouchableOpacity onPress={() => this.navigateToItem(row)}>
-            <View style={styles.row}>
-              <Text>{row.name}</Text>
-              <Text>{row.amount}</Text>
-            </View>
+            <RowItem row={row}/>
           </TouchableOpacity>
         )}
       />

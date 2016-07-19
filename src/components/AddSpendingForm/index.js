@@ -4,34 +4,40 @@ import { View, TextInput, Text, TouchableOpacity } from 'react-native'
 
 import { addSpending, changeToAddSpending } from '../../actions/spending'
 
+import GlobalStyle from '../styles'
+import styles from '../styles/AddSpendingForm'
+
 const AddSpendingFormRoot = React.createClass({
   render() {
     const {
       toAddItem, addItem, changeToAddItem
     } = this.props
     return (
-      <View style={{marginTop: 100, flex: 0.5}}>
-        <Text>
-          Spent
-        </Text>
-        <TextInput
-          style={{height: 40, borderColor: 'gray', borderWidth: 1}}
-          autoCorrect={false}
-          onChangeText={changeToAddItem('amount')}
-          value={toAddItem.get('amount')}
-        />
-        <Text>
-          on
-        </Text>
-        <TextInput
-          style={{height: 40, borderColor: 'gray', borderWidth: 1}}
-          onChangeText={changeToAddItem('name')}
-          value={toAddItem.get('name')}
-        />
-        <TouchableOpacity onPress={
-          () => addItem(toAddItem, () => this.props.navigator.pop(), null)}>
-          <Text>Add new spending</Text>
-        </TouchableOpacity>
+      <View style={[GlobalStyle.mainView, styles.mainView]}>
+        <View style={styles.form}>
+          <Text>
+            Spent
+          </Text>
+          <TextInput
+            style={styles.textInput}
+            autoCorrect={false}
+            onChangeText={changeToAddItem('amount')}
+            value={toAddItem.get('amount')}
+          />
+          <Text>
+            on
+          </Text>
+          <TextInput
+            style={styles.textInput}
+            onChangeText={changeToAddItem('name')}
+            value={toAddItem.get('name')}
+          />
+          <TouchableOpacity onPress={
+            () => addItem(toAddItem, () => this.props.navigator.pop(), null)}
+            style={styles.button}>
+            <Text style={{color: 'white'}}>Add new spending</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     )
   }

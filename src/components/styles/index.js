@@ -1,0 +1,49 @@
+import { StyleSheet } from 'react-native'
+
+/*
+ * https://material.google.com/style/color.html#color-color-palette
+ * p for primary
+ * a for accent
+ */
+export const Colors = {
+  p500 : '#03A9F4',
+  p50: '#E0F7FA',
+  p100: '#B3E5FC',
+  p800: '#0277BD',
+  p900: '#01579B',
+  a100: '#B9F6CA',
+  a200: '#69F0AE',
+  a400: '#00E676',
+  a700: '#00C853'
+}
+
+export const GlobalStyle = StyleSheet.create({
+  navBar: {
+    flex: 1
+  },
+  mainView: {
+    backgroundColor: Colors.p50
+  }
+})
+
+export const SpendingListStyle = StyleSheet.create({
+  row: {
+    backgroundColor: Colors.p100,
+    padding: 10,
+    marginTop: 5
+  },
+  amountLabel: {
+    fontSize: 30
+  },
+  currencyLabel: {
+    opacity: 0.8
+  }
+})
+
+export const SpendingItemStyle = StyleSheet.create({
+  mainView: {
+    flex: 1
+  }
+})
+
+export default GlobalStyle
