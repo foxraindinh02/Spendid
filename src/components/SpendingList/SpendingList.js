@@ -4,6 +4,8 @@ import {
   ListView, Text, View, StyleSheet, TouchableOpacity
 } from 'react-native'
 
+import SpendingItem from '../SpendingItem'
+
 const styles = StyleSheet.create({
   row: {
     marginTop: 30,
@@ -13,6 +15,14 @@ const styles = StyleSheet.create({
 })
 
 const SpendingList = React.createClass({
+  navigateToItem(row) {
+    const nextRoute = {
+      component: SpendingItem,
+      title: row.name,
+      passProps: { item: row }
+    }
+    this.props.navigator.push(nextRoute)
+  },
   render() {
     const {
       spendingList
@@ -25,7 +35,7 @@ const SpendingList = React.createClass({
     return (
       <ListView dataSource={dataSource} renderRow={
         row => (
-          <TouchableOpacity onPress={() => console.warn(row.name)}>
+          <TouchableOpacity onPress={() => this.navigateToItem(row)}>
             <View style={styles.row}>
               <Text>{row.name}</Text>
               <Text>{row.amount}</Text>

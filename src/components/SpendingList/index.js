@@ -4,7 +4,7 @@ import { NavigatorIOS } from 'react-native'
 import SpendingList from './SpendingList'
 import AddSpendingForm from '../AddSpendingForm'
 
-const SpendingListWrapper = React.createClass({
+const SpendingListRoot = React.createClass({
   onRightButtonPress() {
     this.refs.nav.push({
       component: AddSpendingForm,
@@ -27,4 +27,4 @@ const SpendingListWrapper = React.createClass({
   }
 })
 
-export default SpendingListWrapper
+export default SpendingListRoot

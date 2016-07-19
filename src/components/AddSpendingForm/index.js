@@ -4,7 +4,7 @@ import { View, TextInput, Text, TouchableOpacity } from 'react-native'
 
 import { addSpending, changeToAddSpending } from '../../actions/spending'
 
-const AddSpendingForm = React.createClass({
+const AddSpendingFormRoot = React.createClass({
   render() {
     const {
       toAddItem, addItem, changeToAddItem
@@ -50,4 +50,4 @@ const mapDispatchToProps = dispatch => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(AddSpendingForm)
+)(AddSpendingFormRoot)
