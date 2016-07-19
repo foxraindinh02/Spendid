@@ -31,7 +31,9 @@ const spending = (state, action) => {
   case SPENDING.ADD_SPENDING:
     const displayList = state.get('displayList')
     return state.set('displayList',
-      displayList.push(action.item.set('id', displayList.size)))
+      displayList.push(
+        action.item.set('id', displayList.size)))
+                   .set('time', Date.now())
   default:
     return state
   }

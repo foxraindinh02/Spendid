@@ -30,13 +30,25 @@ export const SpendingListStyle = StyleSheet.create({
   row: {
     backgroundColor: Colors.p100,
     padding: 10,
-    marginTop: 5
+    marginTop: 5,
+    flexDirection: 'row',
+    flex: 1
+  },
+  firstColumn: {
+    flex: 0.6
+  },
+  secondColumn: {
+    flex: 0.4,
+    alignItems: 'flex-end'
   },
   amountLabel: {
     fontSize: 30
   },
   currencyLabel: {
     opacity: 0.8
+  },
+  timeLabel: {
+    opacity: 0.6
   }
 })
 

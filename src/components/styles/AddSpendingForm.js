@@ -12,8 +12,8 @@ const styles = StyleSheet.create({
   },
   textInput: {
     height: 40,
-    borderColor: 'gray',
-    borderWidth: 1,
+    borderBottomColor: 'gray',
+    borderBottomWidth: 1,
     padding: 0
   },
   button: {

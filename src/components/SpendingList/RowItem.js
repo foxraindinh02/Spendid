@@ -1,5 +1,7 @@
 import React from 'react'
 import { View, Text } from 'react-native'
+import moment from 'moment'
+
 import { SpendingListStyle } from '../styles'
 
 const RowItem = React.createClass({
@@ -9,11 +11,18 @@ const RowItem = React.createClass({
     } = this.props
     return (
       <View style={SpendingListStyle.row}>
-        <Text>
-          <Text style={SpendingListStyle.amountLabel}>{row.amount}</Text>
-          <Text style={SpendingListStyle.currencyLabel}> €</Text>
-        </Text>
-        <Text>{row.name}</Text>
+        <View style={SpendingListStyle.firstColumn}>
+          <Text>
+            <Text style={SpendingListStyle.amountLabel}>{row.amount}</Text>
+            <Text style={SpendingListStyle.currencyLabel}> €</Text>
+          </Text>
+          <Text>{row.name}</Text>
+        </View>
+        <View style={SpendingListStyle.secondColumn}>
+          <Text style={SpendingListStyle.timeLabel}>
+            {moment(row.time).fromNow()}
+          </Text>
+        </View>
       </View>
     )
   }
