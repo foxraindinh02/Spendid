@@ -1,18 +1,38 @@
 import React from 'react'
-import { View, Text } from 'react-native'
-import GlobalStyle, { SpendingItemStyle } from '../styles'
+import { connect } from 'react-redux'
+import { View, Text, TouchableOpacity } from 'react-native'
+
+import { removeSpending } from '../../actions/spending'
+
+import GlobalStyle from '../styles'
+import styles from '../styles/SpendingItem'
 
 const SpendingItemRoot = React.createClass({
   render() {
     const {
-      item
+      item, removeSpending
     } = this.props
     return (
-      <View style={[GlobalStyle.mainView, SpendingItemStyle.mainView]}>
+      <View style={[GlobalStyle.mainView, styles.mainView]}>
         <Text>{item.name}</Text>
+        <TouchableOpacity onPress={
+          () => {
+            removeSpending(item.id)
+            this.props.navigator.pop()
+          }}
+          style={styles.deleteButton}>
+          <Text style={{color: 'white'}}>Delete</Text>
+        </TouchableOpacity>
       </View>
     )
   }
 })
 
-export default SpendingItemRoot
+const mapDispatchToProps = dispatch => ({
+  removeSpending: itemId => dispatch(removeSpending(itemId))
+})
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(SpendingItemRoot)

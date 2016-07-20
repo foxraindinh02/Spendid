@@ -14,7 +14,8 @@ export const Colors = {
   a100: '#B9F6CA',
   a200: '#69F0AE',
   a400: '#00E676',
-  a700: '#00C853'
+  a700: '#00C853',
+  red: 'rgb(255, 59, 48)'
 }
 
 export const GlobalStyle = StyleSheet.create({
@@ -49,12 +50,6 @@ export const SpendingListStyle = StyleSheet.create({
   },
   timeLabel: {
     opacity: 0.6
-  }
-})
-
-export const SpendingItemStyle = StyleSheet.create({
-  mainView: {
-    flex: 1
   }
 })
 

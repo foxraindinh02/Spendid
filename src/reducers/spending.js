@@ -29,11 +29,15 @@ const spending = (state, action) => {
   case SPENDING.CHANGE_TO_ADD_SPENDING:
     return state.setIn(['toAdd', action.prop], action.value)
   case SPENDING.ADD_SPENDING:
-    const displayList = state.get('displayList')
+    let displayList = state.get('displayList')
     return state.set('displayList',
       displayList.push(
         action.item.set('id', displayList.size)))
                    .set('time', Date.now())
+  case SPENDING.REMOVE_SPENDING:
+    displayList = state.get('displayList')
+    const itemKey = displayList.findKey(item => item.get('id') === action.id)
+    return state.set('displayList', displayList.delete(itemKey))
   default:
     return state
   }

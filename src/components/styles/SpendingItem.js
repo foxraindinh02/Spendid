@@ -5,20 +5,11 @@ import { Colors } from './index'
 const styles = StyleSheet.create({
   mainView: {
     flex: 1,
-    marginTop: 60
+    marginTop: 60,
+    padding: 10
   },
-  form: {
-    margin: 10
-  },
-  textInput: {
-    height: 40,
-    borderBottomColor: 'gray',
-    borderBottomWidth: 1,
-    padding: 0
-  },
-  button: {
-    backgroundColor: Colors.a400,
-    color: 'white',
+  deleteButton: {
+    backgroundColor: Colors.red,
     padding: 10,
     alignItems: 'center',
     marginTop: 10
