@@ -3,7 +3,7 @@ import { SPENDING } from '../actions/types'
 export const initialState = {
   toAdd: {
     name: '',
-    amount: ''
+    amount: '4.1'
   },
   displayList: [
     {

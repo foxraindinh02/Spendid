@@ -15,7 +15,9 @@ export const Colors = {
   a200: '#69F0AE',
   a400: '#00E676',
   a700: '#00C853',
-  red: 'rgb(255, 59, 48)'
+  red: 'rgb(255, 59, 48)',
+  gray: 'gray',
+  white: 'white'
 }
 
 export const GlobalStyle = StyleSheet.create({
@@ -23,7 +25,7 @@ export const GlobalStyle = StyleSheet.create({
     flex: 1
   },
   mainView: {
-    backgroundColor: Colors.p50
+    backgroundColor: Colors.white
   }
 })
 

@@ -23,7 +23,8 @@ const AddSpendingFormRoot = React.createClass({
   },
   _keyboardWillShow(e) {
     this.setState({
-      containerHeight: Dimensions.get('window').height - e.endCoordinates.height
+      containerHeight:
+        Dimensions.get('window').height - e.endCoordinates.height
     })
     Animated.spring(this.state.keyboardOffset, {
       toValue: e.endCoordinates.height,
@@ -46,8 +47,12 @@ const AddSpendingFormRoot = React.createClass({
       'keyboardWillHide', (e) => this._keyboardWillHide(e))
   },
   componentWillUnmount() {
-    _keyboardWillShowSubscription.remove()
-    _keyboardWillHideSubscription.remove()
+    if (_keyboardWillShowSubscription) {
+      _keyboardWillShowSubscription.remove()
+    }
+    if (_keyboardWillHideSubscription) {
+      _keyboardWillHideSubscription.remove()
+    }
   },
   render() {
     const {
@@ -59,25 +64,27 @@ const AddSpendingFormRoot = React.createClass({
         {height: this.state.containerHeight}
       ]}>
         <View style={styles.form}>
-          <Text>
-            Spent
-          </Text>
           <AmountInput value={toAddItem.get('amount')}
             changeValue={changeToAddItem('amount')}/>
-          <Text>
-            on
-          </Text>
+          <View style={styles.formLabel}>
+            <Text style={styles.nameLabelText}>
+              Description
+            </Text>
+          </View>
           <TextInput
-            style={styles.textInput}
+            style={styles.nameInputText}
             onChangeText={changeToAddItem('name')}
             value={toAddItem.get('name')}
           />
           <TouchableOpacity onPress={
-            () => addItem(toAddItem, () => this.props.navigator.pop(), null)}
-            style={styles.button}>
-            <Text style={{color: 'white'}}>
-              Add new spending
-            </Text>
+            () => addItem(
+              toAddItem, () => this.props.navigator.pop(), null)
+            }>
+            <View style={styles.button}>
+              <Text style={{color: 'white'}}>
+                Add new spending
+              </Text>
+            </View>
           </TouchableOpacity>
         </View>
       </Animated.View>

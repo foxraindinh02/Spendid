@@ -10,7 +10,7 @@ const SpendingListRoot = React.createClass({
   onRightButtonPress() {
     this.refs.nav.push({
       component: AddSpendingForm,
-      title: 'Add new item'
+      title: 'New Spending'
     })
   },
   render() {
@@ -19,7 +19,7 @@ const SpendingListRoot = React.createClass({
         ref="nav"
         initialRoute={{
           component: SpendingList,
-          title: 'Last Spendings',
+          title: 'Lists',
           rightButtonTitle: 'Add',
           onRightButtonPress: this.onRightButtonPress
         }}
