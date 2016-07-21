@@ -1,66 +1,69 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import {
-  View, TextInput, Text, TouchableOpacity, PickerIOS
+  View, TextInput, Text, TouchableOpacity,
+  Keyboard, Animated, Dimensions
 } from 'react-native'
 
+import AmountInput from './AmountInput'
 import { addSpending, changeToAddSpending } from '../../actions/spending'
 
 import GlobalStyle from '../styles'
 import styles from '../styles/AddSpendingForm'
 
+let _keyboardWillShowSubscription = null, _keyboardWillHideSubscription = null
+
 const AddSpendingFormRoot = React.createClass({
   getInitialState() {
     return {
       value: 1,
-
+      keyboardOffset: new Animated.Value(0),
+      containerHeight: Dimensions.get('window').height
     }
+  },
+  _keyboardWillShow(e) {
+    this.setState({
+      containerHeight: Dimensions.get('window').height - e.endCoordinates.height
+    })
+    Animated.spring(this.state.keyboardOffset, {
+      toValue: e.endCoordinates.height,
+      friction: 6
+    }).start()
+  },
+  _keyboardWillHide() {
+    this.setState({
+      containerHeight: Dimensions.get('window').height
+    })
+    Animated.spring(this.state.keyboardOffset, {
+      toValue: 0,
+      friction: 6
+    }).start()
+  },
+  componentDidMount() {
+    _keyboardWillShowSubscription = Keyboard.addListener(
+      'keyboardWillShow', (e) => this._keyboardWillShow(e))
+    _keyboardWillHideSubscription = Keyboard.addListener(
+      'keyboardWillHide', (e) => this._keyboardWillHide(e))
+  },
+  componentWillUnmount() {
+    _keyboardWillShowSubscription.remove()
+    _keyboardWillHideSubscription.remove()
   },
   render() {
     const {
       toAddItem, addItem, changeToAddItem
     } = this.props
     return (
-      <View style={[GlobalStyle.mainView, styles.mainView]}>
+      <Animated.View style={[
+        GlobalStyle.mainView, styles.mainView,
+        {height: this.state.containerHeight}
+      ]}>
         <View style={styles.form}>
           <Text>
             Spent
           </Text>
-          <View style={{flexDirection: 'row', flex: 1, alignItems: 'center'}}>
-            <View style={{flex:0.4}}>
-              <PickerIOS
-                selectedValue={this.state.value}
-                onValueChange={val => this.setState({value: val})}
-              >
-                {Array.apply(null, {length: 100})
-                  .map(Number.call, Number).map(item =>
-                  <PickerIOS.Item key={item} value={item}
-                    label={item.toString()}/>
-                )}
-              </PickerIOS>
-            </View>
-            <View style={{padding: 30, flex: 0.1}}>
-              <Text>.</Text>
-            </View>
-            <View style={{flex:0.4}}>
-              <PickerIOS
-                selectedValue={2}
-                onValueChange={val => this.setState({value: val})}
-              >
-                {Array.apply(null, {length: 100})
-                  .map(Number.call, Number).map(item =>
-                  <PickerIOS.Item key={item} value={item}
-                    label={item.toString()}/>
-                )}
-              </PickerIOS>
-            </View>
-          </View>
-          <TextInput
-            style={styles.textInput}
-            autoCorrect={false}
-            onChangeText={changeToAddItem('amount')}
-            value={toAddItem.get('amount')}
-          />
+          <AmountInput value={toAddItem.get('amount')}
+            changeValue={changeToAddItem('amount')}/>
           <Text>
             on
           </Text>
@@ -72,10 +75,12 @@ const AddSpendingFormRoot = React.createClass({
           <TouchableOpacity onPress={
             () => addItem(toAddItem, () => this.props.navigator.pop(), null)}
             style={styles.button}>
-            <Text style={{color: 'white'}}>Add new spending</Text>
+            <Text style={{color: 'white'}}>
+              Add new spending
+            </Text>
           </TouchableOpacity>
         </View>
-      </View>
+      </Animated.View>
     )
   }
 })

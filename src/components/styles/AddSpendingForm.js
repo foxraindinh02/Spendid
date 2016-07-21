@@ -4,11 +4,11 @@ import { Colors } from './index'
 
 const styles = StyleSheet.create({
   mainView: {
-    flex: 1,
     marginTop: 60
   },
   form: {
-    margin: 10
+    margin: 10,
+    flex: 1
   },
   textInput: {
     height: 40,
@@ -18,7 +18,6 @@ const styles = StyleSheet.create({
   },
   button: {
     backgroundColor: Colors.a400,
-    color: 'white',
     padding: 10,
     alignItems: 'center',
     marginTop: 10

@@ -5,7 +5,7 @@ import thunkMiddleWare from 'redux-thunk'
 import rootReducer from './reducers'
 
 const loggerMiddleware = createLogger({
-  level: 'warn',
+  // level: 'warn',
   stateTransformer: state => state && state.toJS()
 })
 
